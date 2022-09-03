@@ -27,6 +27,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceCreated(@NonNull SurfaceHolder holder) {
+        gameloop.startLoop();
 
     }
 
@@ -42,20 +43,29 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void draw(Canvas canvas) {
+
         super.draw(canvas);
+        drawUPS(canvas);
+        drawFPS(canvas);
     }
 
     public void drawUPS(Canvas canvas){
         String averageUPS = Double.toString(gameloop.getAverageUPS());
         Paint paint = new Paint();
         int color = ContextCompat.getColor(contex, R.color.magenta);
-        canvas.drawText("UPS: " + averageUPS, 100, 20, paint);
+        paint.setColor(color);
+        paint.setTextSize(50);
+        canvas.drawText("UPS: " + averageUPS, 100, 30, paint);
     }
     public void drawFPS(Canvas canvas){
         String averageFPS = Double.toString(gameloop.getAverageFPS());
         Paint paint = new Paint();
         int color = ContextCompat.getColor(contex, R.color.magenta);
-        canvas.drawText("FPS: " + averageFPS, 100, 40, paint);
+        paint.setColor(color);
+        paint.setTextSize(50);
+        canvas.drawText("FPS: " + averageFPS, 100, 80, paint);
     }
 
+    public void update() {
+    }
 }
