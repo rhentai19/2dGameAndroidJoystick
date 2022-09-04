@@ -12,15 +12,16 @@ import androidx.core.content.ContextCompat;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback {
     private GameLoop gameloop;
-    private Context contex;
+    private final Player player;
 
     public Game(Context context) {
         super(context);
         SurfaceHolder surfaceHolder = getHolder();
         surfaceHolder.addCallback(this);
-        this.contex = context;
 
         gameloop = new GameLoop(this, surfaceHolder);
+
+        player = new Player();
         setFocusable(true);
 
     }
@@ -52,7 +53,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void drawUPS(Canvas canvas){
         String averageUPS = Double.toString(gameloop.getAverageUPS());
         Paint paint = new Paint();
-        int color = ContextCompat.getColor(contex, R.color.magenta);
+        int color = ContextCompat.getColor(getContext(), R.color.magenta);
         paint.setColor(color);
         paint.setTextSize(30);
         canvas.drawText("UPS: " + averageUPS, 100, 30, paint);
@@ -60,7 +61,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback {
     public void drawFPS(Canvas canvas){
         String averageFPS = Double.toString(gameloop.getAverageFPS());
         Paint paint = new Paint();
-        int color = ContextCompat.getColor(contex, R.color.magenta);
+        int color = ContextCompat.getColor(getContext(), R.color.magenta);
         paint.setColor(color);
         paint.setTextSize(30);
         canvas.drawText("FPS: " + averageFPS, 100, 80, paint);
